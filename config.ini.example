@@ -1,0 +1,5 @@
+[main]
+token = replaceme
+admins = ["Admin", "Mod"]
+# set bantext to "" if you dont want to send a DM before banning 
+bantext = This was an automatic ban to prevent spam bots. If you think that this ban is inappropriate, fill out this form: https://forms.gle/changeme
