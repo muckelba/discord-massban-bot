@@ -26,6 +26,6 @@ python bot.py
 
 ## Usage
 
-`!botspam !botspam [number of minutes since joined (default is 60)] [number of days since account creation (optional)]`
+`!botspam [number of minutes since joined (default is 60)] [number of days since account creation (optional)]`
 
 So if you want to ban every user that joined 120 minutes ago and only accounts that were created 2 weeks ago, use `!botspam 120 14`. You'll get a list of users that got selected. If you want to finally ban that list, click on the reaction. It'll take some time, depending on the amount of users. You'll get a message when the bot is finished.
