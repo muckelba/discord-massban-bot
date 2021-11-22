@@ -94,7 +94,7 @@ async def botspam(ctx, joined="60", created=None):
             logging.info(f"{member} banned")
             await asyncio.sleep(5)
 
-        await ctx.send("Members banned sucessfully!")
+        await ctx.send("Members banned successfully!")
 
 # Boot confirmation
 @client.event
