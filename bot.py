@@ -57,7 +57,13 @@ async def botspam(ctx, joined="60", created=None):
     filename = f"banlist_{randomid}.txt"    
 
     with open(filename, "w") as text_file:
-        text_file.write('\n'.join(str(line) for line in recentlyJoined))
+        accounts = []
+        for account in recentlyJoined:
+            accountjoined = datetime.utcnow() - account.joined_at
+            accountcreated = datetime.utcnow() - account.created_at
+            accounts.append(f"{account.name}#{account.discriminator}, joined {int(accountjoined.seconds / 60)} minutes ago, created {int(accountcreated.days)} days ago.") 
+
+        text_file.write('\n'.join(str(line) for line in accounts))
 
     with open(filename, "rb") as file:
         message = await ctx.send("**The following list of users will be banned, do you want to continue?**\n*You have 2 minutes to click on the reaction emote.*", file=discord.File(file, filename))
