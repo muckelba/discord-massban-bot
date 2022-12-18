@@ -6,7 +6,7 @@ This little bot can ban recently joined users to prevent/cleanup bot spam waves.
 
 I'm hosting a public instance of this bot. You can invite it using [this link](https://discord.com/oauth2/authorize?client_id=907638667600883795&scope=bot&permissions=4). If you have questions or want to report bugs, use the [issues](https://github.com/muckelba/ValoBattlepassCalcBot/issues) tab.
 
-**Make sure to grant the bot ban rights!**
+**MAKE SURE TO GRANT THE BOT BAN RIGHTS AND ENABLE ALL PRIVILEGED GATEWAY INTENTS!**
 
 ## Installation
 
@@ -17,7 +17,7 @@ Install the requirements:
 pip install -r requirements.txt
 ```
 
-Copy and rename `config.ini.example` to `config.ini` and paste the discord bottoken and configure the list of roles that are allowed to use the bot. The `bantext` option can be used to send users a DM before banning them to give false positives a chance to contact you. Set it to `""` to disable this feature. 
+Copy and rename `config.ini.example` to `config.ini` and paste the discord bottoken and configure the list of roles that are allowed to use the bot. 
 
 Run the bot:
 ```bash
