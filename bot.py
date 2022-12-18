@@ -93,7 +93,7 @@ async def botspam(ctx, joined="60", created=None):
                 await ctx.send(f"User could not be banned, error:\n ```{str(e)}```")
                 continue
             logging.info(f"{member} banned")
-            await asyncio.sleep(3)
+            await asyncio.sleep(5)
 
         await ctx.send("Members banned successfully!")
 
