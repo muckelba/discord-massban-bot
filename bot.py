@@ -24,7 +24,6 @@ config.read('config.ini')
 
 token = config['main']['token']
 admins = json.loads(config['main']['admins'])
-bantext = config['main']['bantext']
 
 logging.basicConfig(
     format='[%(asctime)s] %(message)s',
@@ -89,9 +88,6 @@ async def botspam(ctx, joined="60", created=None):
         await ctx.send(f"Banning {len(recentlyJoined)} users...")
         for member in recentlyJoined:
             try:
-                if bantext:
-                    dmchannel = await member.create_dm()
-                    await dmchannel.send(bantext)
                 await member.ban(reason="Bot spam. Automatically banned by massban bot")
             except Exception as e:
                 await ctx.send(f"User could not be banned, error:\n ```{str(e)}```")
