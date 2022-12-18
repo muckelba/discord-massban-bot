@@ -10,7 +10,7 @@ I'm hosting a public instance of this bot. You can invite it using [this link](h
 
 ## Installation
 
-Python 3.6+ required, only tested 3.8!
+Python 3.6+ required, only tested 3.8 and 3.11!
 
 Install the requirements:
 ```bash
