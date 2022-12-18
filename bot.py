@@ -9,9 +9,14 @@ import configparser
 import random 
 from string import ascii_uppercase
 import os
+from datetime import datetime, date
 
-intents = discord.Intents.default()
-intents.members = True
+from dateutil.relativedelta import relativedelta, FR, TU
+from dateutil.easter import easter
+from dateutil.parser import parse
+from dateutil import rrule
+
+intents = discord.Intents.all()
 client = commands.Bot(command_prefix = "!", intents=intents)
 
 config = configparser.ConfigParser()
@@ -19,7 +24,6 @@ config.read('config.ini')
 
 token = config['main']['token']
 admins = json.loads(config['main']['admins'])
-bantext = config['main']['bantext']
 
 logging.basicConfig(
     format='[%(asctime)s] %(message)s',
@@ -45,8 +49,8 @@ async def botspam(ctx, joined="60", created=None):
     recentlyJoined = []
 
     for member in ctx.guild.members:
-        if member.joined_at > datetime.utcnow() - timedelta(minutes=joined) and member != client.user:
-            if (not created) or (created and member.created_at > datetime.utcnow() - timedelta(days=created)):
+        if member.joined_at > datetime.now(timezone.utc) - timedelta(minutes=joined) and member != client.user:
+            if (not created) or (created and member.created_at > datetime.now(timezone.utc) - timedelta(days=created)):
                 recentlyJoined.append(member)
 
     if not recentlyJoined:
@@ -59,8 +63,8 @@ async def botspam(ctx, joined="60", created=None):
     with open(filename, "w") as text_file:
         accounts = []
         for account in recentlyJoined:
-            accountjoined = datetime.utcnow() - account.joined_at
-            accountcreated = datetime.utcnow() - account.created_at
+            accountjoined = datetime.now(timezone.utc) - account.joined_at
+            accountcreated = datetime.now(timezone.utc) - account.created_at
             accounts.append(f"{account.name}#{account.discriminator}, joined {int(accountjoined.seconds / 60)} minutes ago, created {int(accountcreated.days)} days ago.") 
 
         text_file.write('\n'.join(str(line) for line in accounts))
@@ -84,9 +88,6 @@ async def botspam(ctx, joined="60", created=None):
         await ctx.send(f"Banning {len(recentlyJoined)} users...")
         for member in recentlyJoined:
             try:
-                if bantext:
-                    dmchannel = await member.create_dm()
-                    await dmchannel.send(bantext)
                 await member.ban(reason="Bot spam. Automatically banned by massban bot")
             except Exception as e:
                 await ctx.send(f"User could not be banned, error:\n ```{str(e)}```")
